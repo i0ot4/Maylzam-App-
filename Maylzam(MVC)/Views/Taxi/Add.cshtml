@@ -1,0 +1,181 @@
+﻿@using Maylzam_App_.Model
+@*
+@model TaxiDriver
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="Email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="Password" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="Phone" class="form-control" />
+    </div>
+
+    <h2>Upload and Display Image</h2>
+
+    @using (Html.BeginForm("UploadImage", "Driver", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <label for="imageUpload">Select Image:</label>
+            <input type="file" name="imageUpload" id="imageUpload" accept="image/jpeg, image/png" />
+        </div>
+
+        <div>
+            <input type="submit" value="Upload" />
+        </div>
+    }
+
+
+
+    <div class="form-group">
+        <label for="driverLicense">Driver License</label>
+        <input type="file" id="driverLicense" name="Driver_License" class="form-control-file" />
+        @if (Model.Driver_License != null && Model.Driver_License.Length > 0)
+        {
+            <img src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Driver_License))" alt="Driver License" />
+        }
+        else
+        {
+            <p>No driver license image available.</p>
+        }
+    </div>
+
+    <div class="form-group">
+        <label for="personalCard">Personal Card</label>
+        <input type="file" id="personalCard" name="Personal_Card" class="form-control-file" />
+    </div>
+
+    <div class="form-group">
+        <label for="profileImage">Profile Image</label>
+        <input type="file" id="profileImage" name="Profile_Image" class="form-control-file" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Driver</button>
+</form>
+*@
+
+
+
+@model TaxiDriver
+
+
+
+    <form class="row" asp-action="Add">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Create New TaxiDriver Account</h1>
+                </div>
+                <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">TaxiDriver Dashboard</a></li>
+                            <li class="breadcrumb-item active">New Account</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">General</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputName">Name</label>
+                            <input type="text" id="inputName" class="form-control" asp-for="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Emali</label>
+                            <input type="text" id="inputName" class="form-control" asp-for="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Phone</label>
+                            <input type="text" id="inputName" class="form-control" asp-for="Phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputDescription">Password</label>
+                            <textarea id="inputDescription" class="form-control" asp-for="Password"></textarea>
+                        </div>
+                       
+                        
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+
+
+
+
+                <div class="col-md-5">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">budget</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputStatus">Is Active</label>
+                            <select id="inputStatus" class="form-control custom-select" asp-for="IsActive">
+                                <option>false</option>
+                                <option selected disabled>true</option>
+                            </select>
+                        </div>
+
+                        
+                        </div>
+                    </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+        <div class="row">
+            <div class="col-10">
+                <a href="#" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Create Customer" class="btn btn-success float-right">
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+</form>
+
+
+
+                                   @* <script src="~/js/site.js"></script>*@
