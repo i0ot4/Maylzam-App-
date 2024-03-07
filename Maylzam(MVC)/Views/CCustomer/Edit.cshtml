@@ -1,0 +1,240 @@
+﻿ 
+@model Customer
+
+
+
+
+
+<form class="row" asp-action="Edit">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Edit Customer Account</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Customer Dashboard</a></li>
+                            <li class="breadcrumb-item active">Edit Account</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">General</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <input type="hidden" asp-for="Id">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="inputName">Name</label>
+                                <input type="text" id="inputName" class="form-control" asp-for="Name">
+                                <span class="text-danger" asp-validation-for="Name"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName">Emali</label>
+                                <input type="text" id="inputName" class="form-control" asp-for="Email">
+                                <span class="text-danger" asp-validation-for="Email"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName">Phone</label>
+                                <input type="text" id="inputName" class="form-control" asp-for="Phone">
+                                <span class="text-danger" asp-validation-for="Phone"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputDescription">Password</label>
+                                <input type="text" id="inputDescription" class="form-control" asp-for="Password"></input>
+                                <span class="text-danger" asp-validation-for="Password"></span>
+                            </div>
+
+                            <div hidden class="form-group">
+                                <label for="inputDescription">Work at</label>
+                                <input type="text" id="inputDescription" class="form-control" asp-for="worked"></input>
+                                <span class="text-danger" asp-validation-for="worked"></span>
+                            </div>
+
+                            <div hidden class="form-group">
+                                <label for="inputClientCompany" >Date of Created</label>
+                                <input type="text" id="inputClientCompany" asp-for="Created_At" class="form-control">
+                                <span class="text-danger" asp-validation-for="Created_At"></span>
+                            </div>
+                            
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+
+
+
+
+                <div class="col-md-5">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">budget</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="inputStatus">Is Active</label>
+                                <select id="inputStatus" class="form-control custom-select" asp-for="IsActive">
+                                    <option>false</option>
+                                    <option selected>true</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="row">
+                <div class="col-10">
+                    <a href="#" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="ُEdite" class="btn btn-success float-right">
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+</form>
+
+@*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="head-title">
+	<div class="left">
+		<h1>Dashboard</h1>
+		<ul class="breadcrumb">
+			<li>
+				<a href="#">Dashboard</a>
+			</li>
+			<li><i class='bx bx-chevron-right'></i></li>
+			<li>
+				<a class="active" href="#">Home</a>
+			</li>
+		</ul>
+	</div>
+
+</div>
+
+
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+	<div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+		<div class="toast-header">
+			<img src="..." class="rounded me-2" alt="...">
+			<strong class="me-auto">Bootstrap</strong>
+			<small>11 mins ago</small>
+			<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+		</div>
+		<div class="toast-body">
+			Hello, world! This is a toast message.
+		</div>
+	</div>
+</div>
+
+<div class="table-data">
+	<div class="order">
+		<div class="head">
+			<h3>Recent Orders</h3>
+
+
+		</div>
+		<form class="row" asp-action="Edit">
+
+			<input type="hidden"  asp-for="Id">
+			<div asp-validation-summary="All"></div>
+			<div class="form-group col-md-6 col-sm-12">
+				<label class="form-label" asp-for="Name"> </label>
+				<span class="text-danger" asp-validation-for="Name"></span>
+				<input class="form-control" placeholder="" asp-for="Name">
+
+				<small class="text-muted"></small>
+
+			</div>
+			<div class="form-group col-md-6 col-sm-12">
+				<label class="form-label" asp-for="Email"> </label>
+				<span class="text-danger" asp-validation-for="Email"></span>
+				<textarea class="form-control" placeholder="" rows="1" asp-for="Email"></textarea>
+
+				<small class="text-muted"></small>
+
+			</div>
+			<div class="form-group col-md-6 col-sm-12">
+				<label class="form-label" asp-for="Phone"> </label>
+				<span class="text-danger" asp-validation-for="Phone"></span>
+				<textarea class="form-control" placeholder="" rows="1" asp-for="Phone"></textarea>
+
+				<small class="text-muted"></small>
+
+			</div>
+
+			<div class="form-group col-md-12 col-sm-12 text-center  mt-4 ">
+
+
+				<button type="submit" class="btn btn-primary" placeholder="">
+					Save
+				</button>
+
+
+
+			</div>
+
+		</form>
+	</div>
+
+</div>*@
