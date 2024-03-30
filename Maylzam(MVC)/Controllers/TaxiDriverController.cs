@@ -10,7 +10,6 @@ using System.Text.Json.Serialization;
 
 namespace Maylzam_MVC_.Controllers
 {
-    [Authorize("C", )]
 
     public class TaxiDriverController : Controller
     {
