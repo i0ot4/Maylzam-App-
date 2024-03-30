@@ -16,7 +16,6 @@ namespace Maylzam_MVC_.Models
             modelBuilder.Entity<Customer>().Property(x=> x.IsActive).HasDefaultValueSql("(getdate())");
 
 
-            modelBuilder.Entity<>
         }
         public DbSet<TaxiDriver> TaxiDriver { get; set; } // TaxiDrivers لبناء جدوال في قاعدة البيانات اسمه
 
