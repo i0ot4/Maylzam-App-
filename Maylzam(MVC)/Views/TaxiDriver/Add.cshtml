@@ -1,0 +1,117 @@
+﻿ @model TaxiDriver
+
+
+
+
+
+<form class="row" asp-action="Add" enctype="multipart/form-data">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Create New AutoMechanic account</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Customer Dashboard</a></li>
+                            <li class="breadcrumb-item active">New TaxiDriver Account</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">General</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="card-body">
+
+                            
+
+                            <div class="form-group">
+                                <label for="inputClientCompany">Driver License Card</label>
+                                <div class=" input-group">
+                                <input type="file" name="uploadDriverCard" id="inputClientCompany" asp-for="Driver_License" class="form-control">
+                                </div>
+                                <span class="text-danger" asp-validation-for="Driver_License"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputClientCompany">The front of Personal Cards</label>
+                                <div class=" input-group">
+                                <input type="file" name="uploadpersonalcard" id="inputClientCompany" asp-for="Personal_Card" class="form-control">
+                                </div>
+                                <span class="text-danger" asp-validation-for="Personal_Card"></span>
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <label for="inputClientCompany">The back of Personal Cards</label>
+                                <div class=" input-group">
+                                <input type="file" name="uploadpersonalcardback" id="inputClientCompany" asp-for="Personal_Cardback" class="form-control">
+                                </div>
+                                <span class="text-danger" asp-validation-for="Personal_Cardback"></span>
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+
+
+
+
+                <div class="col-md-5">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">budget</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="inputStatus">Is Active</label>
+                                <select id="inputStatus" class="form-control custom-select" asp-for="IsActive">
+                                    <option value="false">false</option>
+                                    <option selected value="true">true</option>
+                                </select>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="row">
+                <div class="col-10">
+                    <a href="#" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="ُAdd" class="btn btn-success float-right">
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+</form>

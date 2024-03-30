@@ -1,11 +1,11 @@
 ﻿ 
-@model Customer
+@model AutoMechanic
 
 
 
 
 
-<form class="row" asp-action="Add">
+<form class="row" asp-action="Add" enctype="multipart/form-data">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -24,7 +24,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -39,38 +38,56 @@
                                 </button>
                             </div>
                         </div>
-@*
-                        <input type="hidden" asp-for="Id">*@
-                        <div asp-validation-summary="All"></div>
+                        
                         <div class="card-body">
+
                             <div class="form-group">
-                                <label for="inputName">Name</label>
-                                <span class="text-danger" asp-validation-for="Name"></span>
-                                <input type="text" id="inputName" class="form-control" asp-for="Name">
+                                <label for="inputClientCompany">Center Name</label>
+                                <div class=" input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                </div>
+                                <input type="text" id="inputClientCompany" asp-for="CenterName" class="form-control">
+                                </div>
+                                <span class="text-danger" asp-validation-for="CenterName"></span>
                             </div>
-                            <div class="form-group">
-                                <label for="inputName">Emali</label>
-                                <span class="text-danger" asp-validation-for="Email"></span>
-                                <input type="text" id="inputName" class="form-control" asp-for="Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputName">Phone</label>
-                                <span class="text-danger" asp-validation-for="Phone"></span>
-                                <input type="text" id="inputName" class="form-control" asp-for="Phone">
+
+                            <div  class="form-group">
+                                <label for="inputClientCompany">Center Locate</label>
+                                <div class=" input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-location"></i></span>
+                                </div>
+                                <input type="text" id="inputClientCompany" asp-for="Center_Location" class="form-control">
+                                </div>
+                                <span class="text-danger" asp-validation-for="Center_Location"></span>
                             </div>
 
                             <div class="form-group">
-                                <label for="inputDescription">Password</label>
-                                <span class="text-danger" asp-validation-for="Password"></span>
-                                <input type="text" id="inputDescription" class="form-control" asp-for="Password"></input>
+                                <label for="inputClientCompany">Rental License</label>
+                                <div class=" input-group">
+                                <input type="file" name="uploadrental" id="inputClientCompany" asp-for="Rental_License" class="form-control">
+                                </div>
+                                <span class="text-danger" asp-validation-for="Rental_License"></span>
                             </div>
 
                             <div class="form-group">
-                                <label for="inputClientCompany">Date of Created</label>
-                                <span class="text-danger" asp-validation-for="Created_At"></span>
-                                <input type="text" id="inputClientCompany" asp-for="Created_At" class="form-control">
+                                <label for="inputClientCompany">The front of Personal Cards</label>
+                                <div class=" input-group">
+                                <input type="file" name="uploadpersonalcard" id="inputClientCompany" asp-for="Personal_Card" class="form-control">
+                                </div>
+                                <span class="text-danger" asp-validation-for="Personal_Card"></span>
                             </div>
                             
+
+                            <div class="form-group">
+                                <label for="inputClientCompany">The back of Personal Cards</label>
+                                <div class=" input-group">
+                                <input type="file" name="uploadpersonalcardback" id="inputClientCompany" asp-for="Personal_Cardback" class="form-control">
+                                </div>
+                                <span class="text-danger" asp-validation-for="Personal_Cardback"></span>
+                            </div>
+
                         </div>
                         <!-- /.card-body -->
                     </div>

@@ -7,11 +7,11 @@ namespace Maylzam_MVC_.Controllers
 {
     public class AutoMechanicRequestController : Controller
     {
-        private readonly IMaintenanceRReposiyory repository;
+        private readonly IAutomMechanicRequestReposiyory repository;
 
         private readonly ICustomerRepository customerrepository;
 
-        public AutoMechanicRequestController(IMaintenanceRReposiyory repository, ICustomerRepository customerrepository)
+        public AutoMechanicRequestController(IAutomMechanicRequestReposiyory repository, ICustomerRepository customerrepository)
         {
             this.repository = repository;
             this.customerrepository = customerrepository;
@@ -59,22 +59,36 @@ namespace Maylzam_MVC_.Controllers
 
             entity.Request.Id = 0;
             var res = await customerrepository.GetById(entity.Id);
-            /*
-                        var c = repository.Entities.Count<Trip>();
-                        entity.Id = c + 1;*/
-            // entity.PaymentId = 1;
+
             entity.Request.CustomerId = res.Id;
             entity.Request.CustomerName = res.Name;
             entity.Request.CustomerPhone = res.Phone;
             entity.Request.Created_At = DateTime.Now;
             entity.Request.IsDelete = false;
+            entity.Request.Status = "Available";
 
             await repository.Add(entity.Request);
 
             await repository.SaveChanges();
 
-            return RedirectToAction("Index");
+            if (res.WorkingIn == "TrafficPolice")
+            {
+                return RedirectToAction("Profile", "TrafficPolice", new { id = res.Id });
+            }
+            else if (res.WorkingIn == "TaxiDriver")
+            {
+                return RedirectToAction("Profile", "TaxiDriver", new { id = res.Id });
+            }
+            else
+            {
+                return RedirectToAction("Profile", "CCustomer", new { id = res.Id });
+            }
         }
+
+
+
+
+
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -83,7 +97,7 @@ namespace Maylzam_MVC_.Controllers
             return View(respo);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(MaintenanceR entity)
+        public async Task<IActionResult> Edit(AutoMechanicRequest entity)
         {
             if (!ModelState.IsValid)
             {

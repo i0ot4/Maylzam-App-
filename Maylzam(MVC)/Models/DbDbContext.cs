@@ -10,29 +10,36 @@ namespace Maylzam_MVC_.Models
         {
 
         }
+         protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>().Property(x=> x.IsActive).HasDefaultValue(true);
+            modelBuilder.Entity<Customer>().Property(x=> x.IsActive).HasDefaultValueSql("(getdate())");
 
-        public DbSet<TaxiDriver> TaxiDrivers { get; set; } // TaxiDrivers لبناء جدوال في قاعدة البيانات اسمه
 
-        public DbSet<Vechicle> Vechicles { get; set; } // Vechicles لبناء جدوال في قاعدة البيانات اسمه
+            modelBuilder.Entity<>
+        }
+        public DbSet<TaxiDriver> TaxiDriver { get; set; } // TaxiDrivers لبناء جدوال في قاعدة البيانات اسمه
 
-        public DbSet<Customer> customers { get; set; }
-        public DbSet<Trip> Trips { get; set; }
-        public DbSet<Payment> Payments { get; set; }
-        public DbSet<Report> Reports { get; set; }
-        public DbSet<AcceptedTrip> AcceptedTrips { get; set; }
-        public DbSet<Notification> Notifications { get; set; }
-        public DbSet<Skill> skills { get; set; }
+        public DbSet<TaxiDriverVechicle> TaxiDriverVechicle { get; set; } // Vechicles لبناء جدوال في قاعدة البيانات اسمه
 
-        public DbSet<Employee> employees { get; set; }
-        public DbSet<AutomMechanic> automMechanics { get; set; }
-        public DbSet<MNotification> mNotifications { get; set; }
-        public DbSet<MaintenanceR> maintenanceRs { get; set; }
-        public DbSet<AcceptedMR> acceptedMRs { get; set; }
-        public DbSet<MReport> mReports { get; set; }
-        public DbSet<TrafficPolice> trafficPolices { get; set; }
-        public DbSet<TPNotification> tpNotifications { get; set; }
-        public DbSet<TPRequest> tpRequests { get; set; }
-        public DbSet<TPAcceptedRequest> tpAcceptedRequests { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<TaxiDriverTrip> TaxiDriverTrip { get; set; }
+        public DbSet<Payment> Payment { get; set; }
+        public DbSet<TaxiDriverReport> TaxiDriverReport { get; set; }
+        public DbSet<TaxiDriverAcceptedTrip> TaxiDriverAcceptedTrip { get; set; }
+        public DbSet<TaxiDriverNotification> TaxiDriverNotification { get; set; }
+        public DbSet<AutoMechanicSkill> AutoMechanicSkill { get; set; }
+
+        public DbSet<AutoMechanicEmployee> AutoMechanicEmployee { get; set; }
+        public DbSet<AutoMechanic> AutoMechanic { get; set; }
+        public DbSet<AutoMechanicNotification> AutoMechanicNotification { get; set; }
+        public DbSet<AutoMechanicRequest> AutoMechanicRequest { get; set; }
+        public DbSet<AutoMechanicAcceptedRequest> AutoMechanicAcceptedRequest { get; set; }
+        public DbSet<AutoMechanicReport> AutoMechanicReport { get; set; }
+        public DbSet<TrafficPolice> TrafficPolice { get; set; }
+        public DbSet<TrafficPoliceNotification> TrafficPoliceNotification { get; set; }
+        public DbSet<TrafficPoliceRequest> TrafficPoliceRequest { get; set; }
+        public DbSet<TrafficPoliceAcceptedRequest> TrafficPoliceAcceptedRequest { get; set; }
 
 
     }

@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
 namespace Maylzam_MVC_.Models
@@ -8,6 +11,8 @@ namespace Maylzam_MVC_.Models
 
     public class Customer
     {
+
+        [Display(Name = "ID")]
         public int Id { get; set; }
         [Required(ErrorMessage = "Please enter the Customer Name")]
         [Display(Name = "Customer Name")]
@@ -21,11 +26,17 @@ namespace Maylzam_MVC_.Models
         [Required(ErrorMessage = "Please enter the Phone Number")]
         [Display(Name = "Phone number")]
         public string? Phone { get; set; }
-        public byte[]? Profile_Image { get; set; }
+        [Display(Name = "Profile Image")]
+        public string? Profile_Image { get; set; }
+        [Display(Name = "Date of created")]
         public DateTime Created_At { get; set; }
+        [Display(Name = "Date of updated")]
         public DateTime Updated_At { get; set; }
-        public string? worked { get; set; }
+        [Display(Name = "Working in")]
+        public string? WorkingIn { get; set; }
+        [Display(Name = "Active")]
         public bool IsActive { get; set; }
+        [Display(Name = "Delete")]
         public bool IsDelete { get; set; }
     }
 

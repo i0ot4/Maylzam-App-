@@ -23,6 +23,9 @@ namespace Maylzam_MVC_.Controllers
             return View(res);
         }
 
+        
+
+
         public async Task<IActionResult> GetDeleted()
         {
             var res = await repository.GetAll(x => x.IsDelete == true);
@@ -32,30 +35,125 @@ namespace Maylzam_MVC_.Controllers
 
 
 
+        [HttpGet]
+        public async Task<IActionResult> Profile(int id)
+        {
 
+            var respo = await repository.GetById(id);
+            return View(respo);
+        }
 
 
 
         [HttpGet]
-        public async Task<IActionResult> Add(int id)
+        public IActionResult Add()
         {
-            var respo = await customerrepository.GetById(id);
-            return View(respo);
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Customer entity, AutomMechanic entities)
+        public async Task<IActionResult> Add(int id,AutoMechanic entity, IFormFile? uploadpersonalcard, IFormFile? uploadpersonalcardback, IFormFile? uploadrental)
         {
-            entities.Id = 0;
-            entities.Created_At = DateTime.Now;
-            entities.IsDelete = false;
-            entity.worked = "AutomMechanic";
-            customerrepository.Update(entity);
+            if (uploadpersonalcard != null && uploadpersonalcard.Length > 0)
+            {
+                var fileName = Path.GetFileName(uploadpersonalcard.FileName);
+                var filePath = Path.Combine("wwwroot/images/autoConfirm/", fileName);
+                entity.Personal_Card = "images/autoConfirm/" + fileName;
+
+
+                using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                {
+                    await uploadpersonalcard.CopyToAsync(fileSrteam);
+                }
+            }
+
+            if (uploadpersonalcardback != null && uploadpersonalcardback.Length > 0)
+            {
+                var fileName = Path.GetFileName(uploadpersonalcardback.FileName);
+                var filePath = Path.Combine("wwwroot/images/autoConfirm/", fileName);
+                entity.Personal_Cardback = "images/autoConfirm/" + fileName;
+
+
+                using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                {
+                    await uploadpersonalcardback.CopyToAsync(fileSrteam);
+                }
+            }
+
+            if (uploadrental != null && uploadrental.Length > 0)
+            {
+                var fileName = Path.GetFileName(uploadrental.FileName);
+                var filePath = Path.Combine("wwwroot/images/autoConfirm/", fileName);
+                entity.Rental_License = "images/autoConfirm/" + fileName;
+
+
+                using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                {
+                    await uploadrental.CopyToAsync(fileSrteam);
+                }
+            }
+
+            var res = await customerrepository.GetById(id);
+            entity.Id = res.Id;
+            entity.Profile_Image = res.Profile_Image;
+            entity.Name = res.Name;
+            entity.Phone = res.Phone;
+            entity.Email = res.Email;
+            entity.Password = res.Password;
+            entity.Created_At = DateTime.Now;
+            entity.IsDelete = false;
+            entity.IsConfirm = false;
+            res.WorkingIn = "AutoMechanic";
+            customerrepository.Update(res);
             await customerrepository.SaveChanges();
-            await repository.Add(entities);
+            await repository.Add(entity);
             await repository.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Deatils(int id)
+        {
+            var res = await repository.GetById(id);
+            return View(res);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Confirm(int id)
+        {
+            var res = await repository.GetById(id);
+            if (!ModelState.IsValid)
+            {
+                return View(res);
+            }
+            res.IsConfirm = true;
+            res.Updated_At= DateTime.Now;
+            repository.Update(res);
+            await repository.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DisConfirm(int id)
+        {
+            var res = await repository.GetById(id);
+            if (!ModelState.IsValid)
+            {
+                return View(res);
+            }
+            
+            var respo = await customerrepository.GetById(res.Id);
+            respo.WorkingIn = "Customer";
+            respo.Updated_At = DateTime.Now;
+            customerrepository.Update(respo);
+            await customerrepository.SaveChanges();
+            repository.Remove(res);
+            await repository.SaveChanges();
+            return RedirectToAction("Index");
+
         }
 
 
@@ -68,7 +166,7 @@ namespace Maylzam_MVC_.Controllers
             return View(respo);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(AutomMechanic entity)
+        public async Task<IActionResult> Edit(AutoMechanic entity)
         {
             if (!ModelState.IsValid)
             {

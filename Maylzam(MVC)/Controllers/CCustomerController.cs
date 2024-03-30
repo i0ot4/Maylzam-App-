@@ -2,6 +2,8 @@
 using Maylzam_MVC_.Repository.IRepository;
 using Maylzam_MVC_.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Maylzam_MVC_.Controllers
 {
@@ -11,19 +13,24 @@ namespace Maylzam_MVC_.Controllers
         private readonly ITaxiDriverRepository taxirepository;
         private readonly IAutomMechanicReposiyory autorepository;
         private readonly ITrafficPoliceReposiyory policereposiyory;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public CCustomerController(ICustomerRepository repository, ITaxiDriverRepository taxirepository,
-            IAutomMechanicReposiyory autorepository,ITrafficPoliceReposiyory policereposiyory)
+
+        public CCustomerController(ICustomerRepository repository, ITaxiDriverRepository taxirepository, IAutomMechanicReposiyory autorepository, ITrafficPoliceReposiyory policereposiyory, IWebHostEnvironment hostingEnvironment)
         {
             this.repository = repository;
             this.taxirepository = taxirepository;
             this.autorepository = autorepository;
             this.policereposiyory = policereposiyory;
+            this.taxirepository = taxirepository;
+            this.autorepository = autorepository;
+            this.policereposiyory = policereposiyory;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public async Task<IActionResult> Index()
         {
-            var res = await repository.GetAll(x => x.IsDelete == false && x.worked == "Customer");
+            var res = await repository.GetAll(x => x.IsDelete == false && x.WorkingIn == "Customer");
 
             return View(res);
         }
@@ -53,25 +60,37 @@ namespace Maylzam_MVC_.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Add(Customer entity)
+        public async Task<IActionResult> Add(Customer entity,IFormFile? uploadFile)
         {
             if (!ModelState.IsValid)
             {
                 return View(entity);
             }
-
             await repository.Add(entity);
-            entity.worked = "Customer";
+            entity.Id = 0;
+            entity.WorkingIn = "Customer";
             entity.Created_At = DateTime.Now;
             entity.IsDelete = false;
+            if (uploadFile != null && uploadFile.Length > 0)
+            {
+                var fileName = Path.GetFileName(uploadFile.FileName);
+                var filePath = Path.Combine("wwwroot/images/", fileName);
+                entity.Profile_Image = "images/"+fileName;
+
+
+                using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                {
+                    await uploadFile.CopyToAsync(fileSrteam);
+                }
+            }
+            else
+            {
+                entity.Profile_Image = "images/MaylZam.png";
+            }
             await repository.SaveChanges();
 
             return RedirectToAction("Index");
         }
-
-
-
-
 
 
 
@@ -84,11 +103,27 @@ namespace Maylzam_MVC_.Controllers
             return View(respo);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Customer entity)
+        public async Task<IActionResult> Edit(Customer entity, IFormFile? uploadFile)
         {
             if (!ModelState.IsValid)
             {
                 return View(entity);
+            }
+            if (uploadFile != null && uploadFile.Length > 0)
+            {
+                var fileName = Path.GetFileName(uploadFile.FileName);
+                var filePath = Path.Combine("wwwroot/images/", fileName);
+                entity.Profile_Image = "images/" + fileName;
+
+
+                using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                {
+                    await uploadFile.CopyToAsync(fileSrteam);
+                }
+            }
+            else
+            {
+                entity.Profile_Image = "images/MaylZam.png";
             }
             entity.IsDelete = false;
             entity.Updated_At = DateTime.Now;

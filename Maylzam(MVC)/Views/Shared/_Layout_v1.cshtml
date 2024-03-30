@@ -29,8 +29,6 @@
     <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="~/plugins/summernote/summernote-bs4.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -224,8 +222,8 @@
                          with font-awesome or any other icon font library -->
                     <!--Taxi Driver Dashboard Drop Menu-->
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <a href="#" class="nav-link active">@*
+                            <i class="nav-icon fas fa-tachometer-alt"></i>*@
                             <p>
                                 Taxi Driver Dashboard
                                 <i class="right fas fa-angle-left"></i>
@@ -233,26 +231,32 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a asp-controller="Taxi" asp-action="Index" class="nav-link active">
+                                <a asp-controller="TaxiDriver" asp-action="Index" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Accounts</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a asp-controller="TaxiTrip" asp-action="Index" class="nav-link">
+                                <a asp-controller="TaxiDriverTrip" asp-action="Index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Requiers</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a asp-controller="TaxiVechicle" asp-action="Index" class="nav-link">
+                                <a asp-controller="TaxiDriverAcceptedTrip" asp-action="Index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Accepted Trips</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="TaxiDriverVechicle" asp-action="Index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Vechicles</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a asp-controller="TaxiReport" asp-action="Index" class="nav-link">
+                                <a asp-controller="TaxiDriverReport" asp-action="Index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Reports</p>
                                 </a>
@@ -264,7 +268,6 @@
                     <!--Traffic Police Dashboard Drop Menu-->
                     <li class="nav-item">
                         <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Traffic Police Dashboard
                                 <i class="right fas fa-angle-left"></i>
@@ -272,7 +275,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a asp-controller="Police" asp-action="Index" class="nav-link active">
+                                <a asp-controller="TrafficPolice" asp-action="Index" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Accounts</p>
                                 </a>
@@ -281,6 +284,12 @@
                                 <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Requiers</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Accepted Requiers</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -298,7 +307,6 @@
                     <!--AutoMechanic Dashboard Drop Menu-->
                     <li class="nav-item">
                         <a class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 AutoMechanic Dashboard
                                 <i class="right fas fa-angle-left"></i>
@@ -312,13 +320,25 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a asp-controller="AutoMechanicRequest" asp-action="Index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Requiers</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a asp-controller="AutomMechanicAcceptedRequest" asp-action="Index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Accepted Requiers</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="AutoMechanicEmp" asp-action="Index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Employees</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="AutoMechanicReport" asp-action="Index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Reports</p>
                                 </a>
@@ -339,7 +359,7 @@
 
                     <li class="nav-item">
                         <a asp-controller="Payments" asp-action="Index" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
+                            <i class="bi bi-wallet-fill"></i> 
                             <p>
                                 Payments Methods
                             </p>
@@ -374,6 +394,11 @@
     <script src="~/dist/js/adminlte.js"></script>
 
     <script src="~/customStyle/script.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

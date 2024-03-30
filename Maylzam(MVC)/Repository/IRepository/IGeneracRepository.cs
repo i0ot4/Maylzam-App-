@@ -15,6 +15,8 @@ namespace Maylzam_MVC_.Repository.IRepository
         void Update(T entitiy);
         EntityEntry<T> UpdateAndReturn(T entity);
         Task<T?> GetById(int Id);
+/*
+        Task<IEnumerable<T>> Search(string searchString);*/
 
 
 

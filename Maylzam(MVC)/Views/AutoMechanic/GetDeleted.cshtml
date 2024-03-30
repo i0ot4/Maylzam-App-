@@ -1,6 +1,6 @@
 ﻿ 
 @using Maylzam_MVC_.Repository.IRepository
-@model List<AutomMechanic>
+@model List<AutoMechanic>
 @inject IAutomMechanicReposiyory repository
 
 
@@ -30,29 +30,29 @@
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Password</th>
-                            <th>Active</th>
-                            <th>Create at</th>
-                            <th>Update at</th>
-                            <th>Action</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Phone</th>
+                            <th class="text-center">Password</th>
+                            <th class="text-center">Active</th>
+                            <th class="text-center">Create at</th>
+                            <th class="text-center">Update at</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.ToList())
                         {
                             <tr>
-                                <td>@item.Id</td>
-                                <td>@item.Name</td>
-                                <td>@item.Email</td>
-                                <td>@item.Phone</td>
-                                <td>@item.Password</td>
-                                <td>@item.IsActive</td>
-                                <td>@item.Created_At</td>
-                                <td>@item.Updated_At</td>
+                                <td class="text-center">@item.Id</td>
+                                <td class="text-center">@item.Name</td>
+                                <td class="text-center">@item.Email</td>
+                                <td class="text-center">@item.Phone</td>
+                                <td class="text-center">@item.Password</td>
+                                <td class="text-center">@item.IsActive</td>
+                                <td class="text-center">@item.Created_At</td>
+                                <td class="text-center">@item.Updated_At</td>
                                 <td>
 
                                     <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">

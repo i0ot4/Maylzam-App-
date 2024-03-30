@@ -2,7 +2,7 @@
 
 namespace Maylzam_MVC_.Repository.IRepository
 {
-    public interface IAutomMechanicReposiyory : IGenericRepository<AutomMechanic>
+    public interface IAutomMechanicReposiyory : IGenericRepository<AutoMechanic>
     {
 
     }

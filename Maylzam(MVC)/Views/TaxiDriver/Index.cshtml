@@ -1,0 +1,202 @@
+﻿ 
+@using Maylzam_MVC_.Repository.IRepository
+@model List<TaxiDriver> 
+@inject ITaxiDriverRepository repository
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">TaxiDriver Accounts</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a>Accounts</a>
+                        </li>
+                        <li class="breadcrumb-item active">TaxiDriver Dashboard</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-add bg-success">
+                        <div class="inner">
+                            <h3>@repository.Entities.Count(x=>x.IsConfirm == true)</h3>
+
+                            <p>Accounts is confirm</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Add User <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>@repository.Entities.Count(x=>x.IsConfirm == false)</h3>
+
+                            <p>Accounts isn`t confirm</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">New <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                         
+                            @{
+                                var date = DateTime.Now.ToShortDateString();
+                                var count = repository.Entities.Count(x => x.Created_At.Date == DateTime.Parse(date).Date);
+                            }
+                            <h3>@count</h3>
+                            <p>Today User Registrations</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>@repository.Entities.Count(x=>x.IsActive == false)</h3>
+
+                            <p>Accounts Blokced</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a asp-controller="TaxiDriver" asp-action="GetDeleted" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </div>
+            <!-- /.row -->
+                    <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Accounts Table</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0" style="height: 400px;">
+                <table class="table table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                      <th class="text-center">ID</th>
+                      <th class="text-center">Photo</th>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Email</th>
+                      <th class="text-center">Phone</th>
+                      <th class="text-center">Password</th>
+                      <th class="text-center">Active</th>
+                      <th class="text-center">Create at</th>
+                      <th class="text-center">Update at</th>
+                      <th class="text-center">Confirm</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      @foreach(var item in Model.ToList()){
+                    <tr>
+                      <td class="text-center">@item.Id</td>
+                      <td class="text-center"><img class="profile-user-img img-fluid img-circle"
+                                                 src="~/@item.Profile_Image"
+                                                 alt="User profile picture">
+                      </td>
+                      <td class="text-center">@item.Name</td>
+                      <td class="text-center">@item.Email</td>
+                      <td class="text-center">@item.Phone</td>
+                      <td class="text-center">@item.Password</td>
+                      <td class="text-center">@item.IsActive</td>
+                      <td class="text-center">@item.Created_At</td>
+                      <td class="text-center">@item.Updated_At</td>
+                      @{
+                           if(item.IsConfirm != true){
+                               
+                      <td class="text-center">
+                      <a class="text-center btn btn-danger" asp-route-id="@item.Id" asp-action="Deatils" asp-controller="TaxiDriver">Deatils</a>
+                      </td>
+                           
+                           }else{
+                               <td class="text-center"><a href="#" class="btn btn-success">ISCONFIRM</a></td>
+                           }
+                         }
+                      <td>
+                      <td class="text-center">
+                          
+                              <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                                    <i class="bi bi-three-dots-vertical"></i>
+                                  </a>
+                                  <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" asp-route-id="@item.Id" asp-action="Edit" asp-controller="TaxiDriver">Edit</a>
+
+                                                    <a class="dropdown-item" asp-route-id="@item.Id" asp-action="Profile" asp-controller="TaxiDriver">Profile</a>
+                                                    <a asp-route-id="@item.Id" asp-action="Remove" asp-controller="TaxiDriver" class="dropdown-item">Delete</a>
+                                                    @{
+                                                        var status = "DisActive";
+                                                        if(@item.IsActive == false){
+                                                             status = "Active";
+                                                        }}
+                                                    <a asp-route-id="@item.Id" asp-action="@status" asp-controller="TaxiDriver" class="dropdown-item">@status</a>
+                                  </div>
+                                  </td>
+                    </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+
+
+
+
+
+
+            <!-- Main row -->
+          
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
