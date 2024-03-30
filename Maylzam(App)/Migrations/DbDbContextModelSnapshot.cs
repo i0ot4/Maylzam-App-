@@ -716,7 +716,7 @@ namespace Maylzam_App_.Migrations
                     b.Property<string>("CurrentLocation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("CustomerImage")
@@ -743,7 +743,7 @@ namespace Maylzam_App_.Migrations
                     b.Property<string>("Payment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PaymentId")
+                    b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Updated_At")

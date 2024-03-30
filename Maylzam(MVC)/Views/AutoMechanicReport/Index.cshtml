@@ -1,0 +1,207 @@
+﻿ 
+@using Maylzam_MVC_.Repository.IRepository
+@model List<AutoMechanicReport> 
+@inject IAutomMechanicReportReposiyory repository
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">AutomMechanic Report</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a>Report</a>
+                        </li>
+                        <li class="breadcrumb-item active">AutomMechanic Dashboard</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-add bg-success">
+                        <div class="inner">
+                            <h3>@repository.Entities.Count(x=>x.Status == "Reviewed")</h3>
+
+                            <p>Reviewed</p>
+                        </div>
+                        <div class="icon">
+                            <i class="bi bi-eye-slash"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>@repository.Entities.Count(x=>x.Status == "UnderReview")</h3>
+
+                            <p>Under Review</p>
+                        </div>
+                        <div class="icon">
+                            <i class="bi bi-eye-fill"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+
+                            @{
+                                var date = DateTime.Now.ToShortDateString();
+                                var count = repository.Entities.Count(x => x.Created_At.Date == DateTime.Parse(date).Date);
+                            }
+                            <h3>@count</h3>
+                            <p>Today Reports</p>
+                        </div>
+                        <div class="icon">
+                            <i class="bi bi-bell-fill"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>@repository.Entities.Count(x=>x.IsDelete == true)</h3>
+
+                            <p>Reports Deleted</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a asp-controller="TaxiDriverReport" asp-action="GetDeleted" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </div>
+
+
+            <!-- /.row -->
+                    <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Fixed Header Table</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0" style="height: 400px;">
+                <table class="table table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                      <th class="text-center">ID</th>
+                      <th class="text-center">Maintenance ID</th>
+                      <th class="text-center">Customer ID</th>
+                      <th class="text-center">AutomMechanic ID</th>
+                      <th class="text-center">Type</th>
+                      <th class="text-center">Description</th>
+                      <th class="text-center">Status</th>
+                      <th class="text-center">Author</th>
+                      <th class="text-center">Active</th>
+                      <th class="text-center">Create at</th>
+                      <th class="text-center">Update at</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                                    @foreach (var item in Model.ToList())
+                                    {
+                        <tr>
+                          <td class="text-center">@item.Id</td>
+                          <td class="text-center">@item.MaintenanceRequestId</td>
+                          <td class="text-center">@item.CustomerId</td>
+                          <td class="text-center">@item.AutomMechanicId</td>
+                          <td class="text-center">@item.Type</td>
+                          <td class="text-center">@item.Description</td>
+                          @{
+                              if(item.Status == "UnderReview"){
+                                  <td class="bg-warning text-center">@item.Status</td>
+                              }else{
+                                  <td class="bg-success text-center">@item.Status</td>
+                              }
+                          }
+                          <td class="text-center">@item.Author</td>
+                          <td class="text-center">@item.IsActive</td>
+                          <td class="text-center">@item.Created_At</td>
+                          <td class="text-center">@item.Updated_At</td>
+                          <td>
+
+                                  <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                      <i class="bi bi-three-dots-vertical"></i>
+                                      </a>
+                                      <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" asp-route-id="@item.Id" asp-action="Edit" asp-controller="AutoMechanicReport">Edit</a>
+                                                    <a asp-route-id="@item.Id" asp-action="Remove" asp-controller="AutoMechanicReport" class="dropdown-item">Delete</a>
+                                                    @{
+                                                        var IsActive = "DisActive";
+                                                        if (@item.IsActive == false)
+                                                        {
+                                                            IsActive = "Active";
+                                                        }
+                                                    }
+                                                    <a asp-route-id="@item.Id" asp-action="@IsActive" asp-controller="AutoMechanicReport" class="dropdown-item">@IsActive</a>
+
+                                                    @{
+                                                        var status = "UnderReview";
+                                                        if (@item.Status == "UnderReview")
+                                                        {
+                                                            status = "Reviewed";
+                                                        }
+                                                    }
+                                                    <a asp-route-id="@item.Id" asp-action="@status" asp-controller="AutoMechanicReport" class="dropdown-item">@status</a>
+                                      </div>
+                                      </td>
+                        </tr>
+                                    }
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+
+
+
+
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

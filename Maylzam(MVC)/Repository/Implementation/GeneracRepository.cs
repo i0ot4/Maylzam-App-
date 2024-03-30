@@ -1,9 +1,9 @@
-﻿using Maylzam_App_.Repository.IRepository;
+﻿using Maylzam_MVC_.Repository.IRepository;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Maylzam_App_.Model;
+using Maylzam_MVC_.Models;
 
 namespace Maylzam_MVC_.Repository.Implementation
 {
@@ -13,7 +13,6 @@ namespace Maylzam_MVC_.Repository.Implementation
         public DbDbContext _context;
         private IDbContextTransaction _transaction;
         internal DbSet<T> dbSet;
-        private DbDbContext context;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public GenericRepository(DbDbContext context)
@@ -95,6 +94,15 @@ namespace Maylzam_MVC_.Repository.Implementation
         {
             return await _context.SaveChangesAsync(cancellationToken);
         }
+
+/*
+        public async Task<IEnumerable<T>> Search(string searchString)
+        {
+            var entities = from e in _context.Set<T>() select e;
+
+            return await entities.ToListAsync();
+        }*/
+
 
         public void Dispose()
         {

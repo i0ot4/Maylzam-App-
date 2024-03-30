@@ -1,0 +1,101 @@
+﻿@model TaxiDriverVechicle
+
+@inject ITaxiDriverRepository repositry
+@{
+    var taxiname = await repositry.GetById(Model.DriverId);
+}
+
+<form asp-action="details" >
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Confirm Vechicle</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">TaxiDriver Dashboard</a></li>
+                            <li class="breadcrumb-item active">Details Vechicle Account</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+<!-- /.col -->
+<div class="col-md-12">
+    <!-- Widget: user widget style 1 -->
+    <div class="card card-widget widget-user">
+        <!-- Add the bg color to the header using any of the bg-* classes -->
+        <div class="widget-user-header bg-info">
+            <h3 class="widget-user-username">@taxiname.Name</h3>
+        </div>
+        <div class="widget-user-image">
+            <img class="img-circle elevation-2" src="~/images/MaylZam.png" alt="User Avatar">
+        </div>
+        <div class="card-footer">
+
+
+                    
+
+            <div class="row">
+                <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                        <span class="description-text">Type</span>
+                        <h5 class="description-header">@Model.Type</h5>
+                    </div>
+                    <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                        <span class="description-text">Model</span>
+                        <h5 class="description-header">@Model.Model</h5>
+                    </div>
+                    <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4">
+                    <div class="description-block">
+                        <span class="description-text">Plate Number</span>
+                        <h5 class="description-header">@Model.licensePlateNumber</h5>
+                    </div>
+                    <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+            </div>
+
+
+            <section class="content">
+            <div class="row">
+              
+              <div class="col-md-12 col-lg-6 col-xl-12">
+                  <h4 class="text-center">The Vehicle License Card Image</h4>
+                <div class="card mb-2">
+                  <img class="img-fluid pad" src="~/@Model.vehicleLicenseCardImage" alt="The Vehicle License Card Image">
+                </div>
+              </div>
+
+
+              
+            </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                                <a asp-route-id="@Model.Id" asp-action="DisConfirm" asp-controller="TaxiDriverVechicle" class="btn btn-danger">DisConfirm</a>
+                                <a asp-route-id="@Model.Id" asp-action="Confirm" asp-controller="TaxiDriverVechicle" class="btn btn-success  float-right">Confirm</a>
+                        </div>
+                    </div>
+        
+                    </section>
+            <!-- /.row -->
+        </div>
+    </div>
+    <!-- /.widget-user -->
+</div>
+</div>
+</form>

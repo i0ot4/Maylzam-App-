@@ -17,7 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Maylzam(App)\Maylzam(App).csproj" />
+    <Folder Include="wwwroot\images\Employee\" />
+    <Folder Include="wwwroot\images\autoConfirm\" />
+    <Folder Include="wwwroot\images\TrafficPolice\" />
+    <Folder Include="wwwroot\images\TaxiDriver\Vechicle\" />
   </ItemGroup>
 
 </Project>

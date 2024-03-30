@@ -1,11 +1,11 @@
-﻿@using Maylzam_App_.Model
+﻿ 
 @model Customer
 
 
 
 
 
-<form class="row" asp-action="Edit">
+<form class="row" asp-action="Edit" enctype="multipart/form-data">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -41,40 +41,44 @@
                         </div>
 
                         <input type="hidden" asp-for="Id">
-                        <div asp-validation-summary="All"></div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="inputName">Name</label>
-                                <span class="text-danger" asp-validation-for="Name"></span>
+                                <label asp-for="Name"></label>
                                 <input type="text" id="inputName" class="form-control" asp-for="Name">
+                                <span class="text-danger" asp-validation-for="Name"></span>
                             </div>
                             <div class="form-group">
-                                <label for="inputName">Emali</label>
-                                <span class="text-danger" asp-validation-for="Email"></span>
+                                <label asp-for="Email"></label>
                                 <input type="text" id="inputName" class="form-control" asp-for="Email">
+                                <span class="text-danger" asp-validation-for="Email"></span>
                             </div>
                             <div class="form-group">
-                                <label for="inputName">Phone</label>
-                                <span class="text-danger" asp-validation-for="Phone"></span>
+                                <label asp-for="Phone"></label>
                                 <input type="text" id="inputName" class="form-control" asp-for="Phone">
+                                <span class="text-danger" asp-validation-for="Phone"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Profile_Image"></label>
+                                <input type="file" name="uploadFile" asp-for="Profile_Image" class="form-control" />
+
                             </div>
 
                             <div class="form-group">
-                                <label for="inputDescription">Password</label>
+                                <label asp-for="Password"></label>
+                                <input type="text" id="inputpassword" class="form-control" asp-for="Password"></input>
                                 <span class="text-danger" asp-validation-for="Password"></span>
-                                <input type="text" id="inputDescription" class="form-control" asp-for="Password"></input>
                             </div>
 
-                            <div class="form-group">
-                                <label for="inputDescription">Work at</label>
-                                <span class="text-danger" asp-validation-for="worked"></span>
-                                <input type="text" id="inputDescription" class="form-control" asp-for="worked"></input>
+                            <div hidden class="form-group">
+                                <label asp-for="WorkingIn"></label>
+                                <input type="text" id="inputDescription" class="form-control" asp-for="WorkingIn"></input>
+                                <span class="text-danger" asp-validation-for="WorkingIn"></span>
                             </div>
 
-                            <div class="form-group">
-                                <label for="inputClientCompany" >Date of Created</label>
-                                <span class="text-danger" asp-validation-for="Created_At"></span>
+                            <div hidden class="form-group">
+                                <label asp-for="Created_At"></label>
                                 <input type="text" id="inputClientCompany" asp-for="Created_At" class="form-control">
+                                <span class="text-danger" asp-validation-for="Created_At"></span>
                             </div>
                             
                         </div>
@@ -100,10 +104,10 @@
 
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="inputStatus">Is Active</label>
+                                <label for="inputStatus" asp-for="IsActive"></label>
                                 <select id="inputStatus" class="form-control custom-select" asp-for="IsActive">
                                     <option>false</option>
-                                    <option selected disabled>true</option>
+                                    <option selected>true</option>
                                 </select>
                             </div>
                         </div>
